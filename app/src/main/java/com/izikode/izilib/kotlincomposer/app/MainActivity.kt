@@ -32,7 +32,7 @@ class MainActivity : AppCompatActivity() {
                         print("Hello world from top level!")
                     """.trimIndent()
                 ).build()
-        )).toString()
+        ).build()).toString()
 
     val withComposer = (compose a file("SimpleClass") {
         compose a `package`("com.izikode.izilib.kotlincomposer.app") {
