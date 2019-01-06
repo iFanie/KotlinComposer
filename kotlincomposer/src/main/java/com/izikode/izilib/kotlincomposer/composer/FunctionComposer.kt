@@ -14,4 +14,6 @@ data class FunctionComposer (
 
     }.build()
 
+    override fun toString(): String = createSpec().toString()
+
 }

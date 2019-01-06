@@ -33,4 +33,6 @@ data class FileComposer(
 
     }.build()
 
+    override fun toString(): String = createSpec().toString()
+
 }

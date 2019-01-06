@@ -20,4 +20,6 @@ data class ClassComposer (
         functionComposers[it].createSpec()
     }
 
+    override fun toString(): String = createSpec().toString()
+
 }
