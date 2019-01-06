@@ -14,32 +14,27 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
     }
 
-    val withoutComposer = FileSpec.builder(
-        "com.izikode.izilib.kotlincomposer.app",
-        "SimpleClass"
-    ).addType(
-        TypeSpec.classBuilder(
-        "SimpleClass"
+    val withoutComposer = (FileSpec.builder("com.izikode.izilib.kotlincomposer.app", "SimpleClass")
+        .addType(
+            TypeSpec.classBuilder("SimpleClass")
+                .addFunction(
+                    FunSpec.builder("helloWorld")
+                        .addCode(
+                            """
+                                print("Hello world!")
+                            """.trimIndent()
+                        ).build()
+                ).build()
         ).addFunction(
-            FunSpec.builder(
-                "helloWorld"
-            ).addCode(
-                """
-                    print("Hello world!")
-                """.trimIndent()
-            ).build()
-        ).build()
-    ).addFunction(
-        FunSpec.builder(
-            "topHelloWorld"
-        ).addCode(
-            """
-                print("Hello world from top level!")
-            """.trimIndent()
-        ).build()
-    )
+            FunSpec.builder("topHelloWorld")
+                .addCode(
+                    """
+                        print("Hello world from top level!")
+                    """.trimIndent()
+                ).build()
+        )).toString()
 
-    val withComposer = compose a file("SimpleClass") {
+    val withComposer = (compose a file("SimpleClass") {
         compose a `package`("com.izikode.izilib.kotlincomposer.app") {
 
             compose a `class`("SimpleClass") {
@@ -59,6 +54,6 @@ class MainActivity : AppCompatActivity() {
             }
 
         }
-    }
+    }).toString()
 
 }
