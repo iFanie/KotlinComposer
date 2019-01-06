@@ -10,7 +10,9 @@ data class ClassComposer (
 
     internal fun createSpec() = TypeSpec.classBuilder(name ?: "").apply {
 
-        /* TODO update spec */
+        createFunctionSpecs().forEach {
+            addFunction(it)
+        }
 
     }.build()
 
