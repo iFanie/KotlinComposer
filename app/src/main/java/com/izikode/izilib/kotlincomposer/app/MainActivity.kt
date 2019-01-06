@@ -12,6 +12,9 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        print(withoutComposer)
+        print(withComposer)
     }
 
     val withoutComposer = (FileSpec.builder("com.izikode.izilib.kotlincomposer.app", "SimpleClass")
@@ -21,16 +24,16 @@ class MainActivity : AppCompatActivity() {
                     FunSpec.builder("helloWorld")
                         .addCode(
                             """
-                                print("Hello world!")
-                            """.trimIndent()
+                                |print("Hello world!")
+                            """.trimMargin()
                         ).build()
                 ).build()
         ).addFunction(
             FunSpec.builder("topHelloWorld")
                 .addCode(
                     """
-                        print("Hello world from top level!")
-                    """.trimIndent()
+                        |print("Hello world from top level!")
+                    """.trimMargin()
                 ).build()
         ).build()).toString()
 
@@ -41,16 +44,16 @@ class MainActivity : AppCompatActivity() {
 
                 compose a `fun`("helloWorld") {
                     """
-                        print("Hello world!")
-                    """
+                        |print("Hello world!")
+                    """.trimMargin()
                 }
 
             }
 
             compose a `fun`("topHelloWorld") {
                 """
-                    print("Hello world from top level!")
-                """
+                    |print("Hello world from top level!")
+                """.trimMargin()
             }
 
         }
