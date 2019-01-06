@@ -16,7 +16,6 @@ fun ClassScope.`fun`(name: String, block: FunctionScope.() -> String) = getCompo
 }
 
 private inline fun getComposer(name: String, block: FunctionScope.() -> String) = FunctionComposer(name).apply {
-    FunctionScope(this).apply {
-        block()
-    }
+    val scope = FunctionScope(this)
+    code = scope.block()
 }

@@ -4,13 +4,17 @@ import com.squareup.kotlinpoet.FunSpec
 
 data class FunctionComposer (
 
-        var name: String? = null
+        var name: String? = null,
+
+        var code: String? = null
 
 ) : Composer() {
 
     internal fun createSpec() = FunSpec.builder(name ?: "").apply {
 
-        /* TODO update spec */
+        code?.let {
+            addCode(it)
+        }
 
     }.build()
 
