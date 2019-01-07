@@ -6,6 +6,10 @@ class SimpleClass {
         print("Hello world!")
     }
 
+    private fun privateHelloWorld() {
+        print("Hello world, in private.")
+    }
+
 }
 
 fun topHelloWorld() {
