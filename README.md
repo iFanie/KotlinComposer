@@ -1,18 +1,18 @@
 # KotlinComposer [ WIP ]
 #### Expressive and functional wrapper around KotlinPoet 
 
-## Let's make some musiK
-
 Consider this simple class:
 ```kotlin
 package com.izikode.izilib.kotlincomposer.app
 
 class SimpleClass {
-
     fun helloWorld() {
         print("Hello world!")
     }
-
+    
+    private fun privateHelloWorld() {
+        print("Hello world, in private.")
+    }
 }
 
 fun topHelloWorld() {
@@ -23,24 +23,32 @@ fun topHelloWorld() {
 - Generating it **without** KotlinComposer:
 ```kotlin
 FileSpec.builder("com.izikode.izilib.kotlincomposer.app", "SimpleClass")
-.addType(
-    TypeSpec.classBuilder("SimpleClass")
-        .addFunction(
-            FunSpec.builder("helloWorld")
-                .addCode(
-                    """
-                        print("Hello world!")
-                    """
-                ).build()
-        ).build()
-).addFunction(
-    FunSpec.builder("topHelloWorld")
-        .addCode(
-            """
-                print("Hello world from top level!")
-            """
-        ).build()
-).build()
+    .addType(
+        TypeSpec.classBuilder("SimpleClass")
+            .addFunction(
+                FunSpec.builder("helloWorld")
+                    .addCode(
+                        """
+                            |print("Hello world!")
+                        """.trimMargin()
+                    ).build()
+            ).addFunction(
+                FunSpec.builder("privateHelloWorld")
+                    .addModifiers(KModifier.PRIVATE)
+                    .addCode(
+                        """
+                            |print("Hello world, in private.")
+                        """.trimMargin()
+                    ).build()
+            ).build()
+    ).addFunction(
+        FunSpec.builder("topHelloWorld")
+            .addCode(
+                """
+                    print("Hello world from top level!")
+                """
+            ).build()
+    ).build()
 ```
 
 - And **with**:
@@ -53,6 +61,12 @@ compose a file("SimpleClass") {
                     print("Hello world!")
                 """
             }
+
+            compose a `fun`("privateHelloWorld") {
+                """
+                    print("Hello world, in private.")
+                """
+            } `as` private
         }
 
         compose a `fun`("topHelloWorld") {
